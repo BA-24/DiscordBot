@@ -1,12 +1,22 @@
-
 def nGet(number):
-    with open('notes.txt', 'r') as f:
-        noteNumbers = [line.split(None, 1)[0] for line in f]
-        with open('notes.txt', 'r') as x:
-            notes = x.readlines()
+    try:
+        note = ''
+        with open('notes.txt', 'r') as f:
+            noteNumbers = [line.split(None, 1)[0] for line in f]
+            with open('notes.txt', 'r') as x:
+                notes = x.readlines()
 
-    for x in range(len(notes)):
-        notes[x] = notes[x].replace(noteNumbers[x], '', 1)
-        notes[x] = notes[x].replace(' ', '', 1)
-    print(noteNumbers)
-    print(notes)
+        for x in range(len(notes)):
+            notes[x] = notes[x].replace(noteNumbers[x], '', 1)
+            notes[x] = notes[x].replace(' ', '', 1)
+            notes[x] = notes[x].replace('\n', '', 1)
+
+        for x in range(len(noteNumbers)):
+            if str(number) == noteNumbers[x]:
+                note = notes[x]
+                return [True, note]
+        if note == '':
+            return [True, None]
+
+    except Exception as error:
+        return [False, error]
