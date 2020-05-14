@@ -1,4 +1,4 @@
-def nGet(number):
+def nGet(number, includeNumber):
     try:
         note = ''
         with open('notes.txt', 'r') as f:
@@ -7,9 +7,10 @@ def nGet(number):
                 notes = x.readlines()
 
         for x in range(len(notes)):
-            notes[x] = notes[x].replace(noteNumbers[x], '', 1)
-            notes[x] = notes[x].replace(' ', '', 1)
-            notes[x] = notes[x].replace('\n', '', 1)
+            if includeNumber == False:
+                notes[x] = notes[x].replace(noteNumbers[x], '', 1)
+                notes[x] = notes[x].replace(' ', '', 1)
+                notes[x] = notes[x].replace('\n', '', 1)
 
         for x in range(len(noteNumbers)):
             if str(number) == noteNumbers[x]:
