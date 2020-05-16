@@ -1,3 +1,5 @@
+#needs nGet() to function
+
 def nDel(number):
     try:
         note = nGet(number, True)
