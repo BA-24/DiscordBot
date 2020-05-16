@@ -1,1 +1,12 @@
+def nDel(number):
+    try:
+        note = nGet(number, True)
+        x = open('notes.txt', 'r')
+        notes = x.readlines()
+        x.close()
+        notes.remove(note[1])
+        return [True, notes]
+        
 
+    except Exception as error:
+        return [False, error]
