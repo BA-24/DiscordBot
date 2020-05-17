@@ -12,3 +12,4 @@ def nDel(number):
 
     except Exception as error:
         return [False, error]
+        
