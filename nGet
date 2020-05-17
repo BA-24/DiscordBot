@@ -1,10 +1,16 @@
 def nGet(number, includeNumber):
     try:
         note = ''
+        f = open('notes.txt', 'r')
+        wordlist = ''
+        for r in f:    
+            if r != '\n':
+                wordlist = wordlist + r.split()[0]
+        f.close()
+        
+        noteNumbers = list(str(wordlist))
         with open('notes.txt', 'r') as f:
-            noteNumbers = [line.split(None, 1)[0] for line in f]
-            with open('notes.txt', 'r') as x:
-                notes = x.readlines()
+            notes = f.readlines()
 
         for x in range(len(notes)):
             if includeNumber == False:
@@ -16,8 +22,9 @@ def nGet(number, includeNumber):
             if str(number) == noteNumbers[x]:
                 note = notes[x]
                 return [True, note]
+            
         if note == '':
             return [True, None]
-
+    
     except Exception as error:
         return [False, error]
