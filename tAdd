@@ -1,0 +1,8 @@
+def tAdd(msg):
+    try:
+        x = open('topics.txt', 'w')
+        x.write(msg)
+        x.close()
+        return [True, None]
+    except Exception as error:
+        return [False, error]
