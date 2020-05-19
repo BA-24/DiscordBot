@@ -1,0 +1,20 @@
+def nEdit(number, msg):
+    try:
+        f = open('notes.txt', 'r')
+        notes = f.readlines()
+        f.close()
+        note = ''
+        for x in notes:
+            if x != '\n' and (x.split()[0]).isdigit() and number == int(x.split()[0]):
+                note = x.split()[0]
+        Del = nDel(note)
+        Add = nAdd(note, msg)
+        if Del[0] == False:
+            return [False, Del[1]]
+        if Add[0] == False:
+            return  [False, Add[1]]
+        else:
+            return [True, None]
+        
+    except Exception as error:
+        return [False, error]
