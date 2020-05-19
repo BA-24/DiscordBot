@@ -1,3 +1,4 @@
+#requires nDel and nAdd to work.
 def nEdit(number, msg):
     try:
         f = open('notes.txt', 'r')
