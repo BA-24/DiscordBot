@@ -1,5 +1,3 @@
-#needs nGet() to function
-
 def nDel(number):
     try:
         note = nGet(number, True)
@@ -15,6 +13,5 @@ def nDel(number):
             x.close()
             return [True, note[1]]
         
-
     except Exception as error:
-        return [False, error]
+        return [False, 'Error in nDel: ' + str(error)]
