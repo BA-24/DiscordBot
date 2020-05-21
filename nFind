@@ -8,4 +8,4 @@ def nFind(message):
                 return [True, x]
         
     except Exception as error:
-        return [False, error]
+        return [False, 'Error in nFind: ' + str(error)]
