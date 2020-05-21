@@ -6,4 +6,4 @@ def nAdd(number, msg):
         x.close()
         return [True, None]
     except Exception as error:
-        return [False, error]
+        return [False, 'Error in nAdd: ' + str(error)]
