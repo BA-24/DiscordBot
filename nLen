@@ -6,4 +6,4 @@ def nLen():
         return [True, len(notes)]
     
     except Exception as error:
-        return [False, error]
+        return [False, 'Error in nLen: ' + str(error)]
