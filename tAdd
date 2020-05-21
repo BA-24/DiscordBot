@@ -5,4 +5,4 @@ def tAdd(msg):
         x.close()
         return [True, None]
     except Exception as error:
-        return [False, error]
+        return [False, 'Error in tAdd: ' + str(error)]
