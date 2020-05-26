@@ -1,6 +1,6 @@
 def tAdd(msg):
     try:
-        x = open('topics.txt', 'w')
+        x = open('topics.txt', 'a')
         x.write(msg)
         x.close()
         return [True, None]
