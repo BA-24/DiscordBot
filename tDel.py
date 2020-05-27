@@ -10,6 +10,7 @@ def tDel(number):
             f = open('topics.txt', 'w')
             f.write(''.join(topics))
             f.close()
-            return [True, None]
+            return [True, topics[number]]
+        
     except Exception as error:
         return [False, 'Error in tDel: ' + str(error)]
