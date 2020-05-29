@@ -6,11 +6,12 @@ def tDel(number):
         if number >= len(topics):
             return [True, None]
         else:
-            topics.remove(topics[number])
+            removed = topics[number]
+            topics.remove(removed)
             f = open('topics.txt', 'w')
             f.write(''.join(topics))
             f.close()
-            return [True, topics[number]]
+            return [True, removed]
         
     except Exception as error:
         return [False, 'Error in tDel: ' + str(error)]
