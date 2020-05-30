@@ -6,7 +6,10 @@ def tGet(number):
         if number >= len(topics):
             return [True, None]
         else:
-            return [True, topics[number].replace('\n', '', 1)]
+            if topics[number] == '' or topics[number] == '\n':
+                return[True, None]
+            else:
+                return [True, topics[number].replace('\n', '', 1)]
 
     except Exception as error:
         return [False, 'Error in tGet: ' + str(error)]
