@@ -562,4 +562,4 @@ async def backup(ctx, *, msg = None):
 
 
 
-bot.run('NTk5MTk0NDkyNDkwNDgxNjY0.XSiMCA.3-N7ylwvosxkpyQwt2GuYdSvnhE')
+bot.run(token)
