@@ -1,6 +1,4 @@
-#THIS FUNCTION HAS NOT BEEN TESTED AND PROBABLY DOESN'T WORK
-
-def backup(mode):
+def tnBackup(mode):
     try:
         if mode == 'save':
             f = open('notes.txt', 'r')
@@ -9,18 +7,18 @@ def backup(mode):
             f = open('topics.txt', 'r')
             topics = f.read()
             f.close()
-            f = open('backup\notes.txt', 'w')
+            f = open('./backup/notes.txt', 'w')
             f.write(notes)
             f.close()
-            f = open('backup\topics.txt', 'w')
+            f = open('./backup/topics.txt', 'w')
             f.write(topics)
             f.close()
             return [True, 'save']
         elif mode == 'load':
-            f = open('backup\notes.txt', 'r')
+            f = open('./backup/notes.txt', 'r')
             notes = f.read()
             f.close()
-            f = open('backup\topics.txt', 'r')
+            f = open('./backup/topics.txt', 'r')
             topics = f.read()
             f.close()
             f = open('notes.txt', 'w')
@@ -31,6 +29,6 @@ def backup(mode):
             f.close()
             return [True, 'load']
         return [True, None]
-        
+
     except Exception as error:
         return[False, error]
