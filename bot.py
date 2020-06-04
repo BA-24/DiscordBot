@@ -1,34 +1,34 @@
-#THIS HAS NOT BEEN FULLY TESTED SO EXPECT BUGS
+#THIS IS NOT DONE YET AND FEATURES MIGHT NOT WORK AS EXPECTEDLY OR AT ALL
 
 #list managing ---------------------------------------------------------------------------------------
 
 def tnBackup(mode):
     try:
         if mode == 'save':
-            f = open('notes.txt', 'r')
+            f = open('notes.txt', 'r', encoding="utf-8")
             notes = f.read()
             f.close()
-            f = open('topics.txt', 'r')
+            f = open('topics.txt', 'r', encoding="utf-8")
             topics = f.read()
             f.close()
-            f = open('./backup/notes.txt', 'w')
+            f = open('./backup/notes.txt', 'w', encoding="utf-8")
             f.write(notes)
             f.close()
-            f = open('./backup/topics.txt', 'w')
+            f = open('./backup/topics.txt', 'w', encoding="utf-8")
             f.write(topics)
             f.close()
             return [True, 'save']
         elif mode == 'load':
-            f = open('./backup/notes.txt', 'r')
+            f = open('./backup/notes.txt', 'r', encoding="utf-8")
             notes = f.read()
             f.close()
-            f = open('./backup/topics.txt', 'r')
+            f = open('./backup/topics.txt', 'r', encoding="utf-8")
             topics = f.read()
             f.close()
-            f = open('notes.txt', 'w')
+            f = open('notes.txt', 'w', encoding="utf-8")
             f.write(notes)
             f.close()
-            f = open('topics.txt', 'w')
+            f = open('topics.txt', 'w', encoding="utf-8")
             f.write(topics)
             f.close()
             return [True, 'load']
@@ -41,7 +41,7 @@ def tnBackup(mode):
 def nAdd(number, msg):
     try:
         number = str(number)
-        x = open('notes.txt','a')
+        x = open('notes.txt','a', encoding="utf-8")
         x.write(number + ' ' + msg + '\n')
         x.close()
         return [True, None]
@@ -56,11 +56,11 @@ def nDel(number):
         if note[1] == None:
             return [True, None]
         else:
-            x = open('notes.txt', 'r')
+            x = open('notes.txt', 'r', encoding="utf-8")
             notes = x.readlines()
             x.close()
             notes.remove(note[1])
-            x = open('notes.txt', 'w')
+            x = open('notes.txt', 'w', encoding="utf-8")
             x.write("".join(notes))
             x.close()
             return [True, note[1]]
@@ -71,7 +71,7 @@ def nDel(number):
 
 def nFind(message):
     try:
-        x = open('notes.txt', 'r')
+        x = open('notes.txt', 'r', encoding="utf-8")
         notes = x.readlines()
         x.close()
         for x in range(len(notes)):
@@ -85,7 +85,7 @@ def nFind(message):
 def nGet(number, includeNumber):
     try:
         note = ''
-        f = open('notes.txt', 'r')
+        f = open('notes.txt', 'r', encoding="utf-8")
         wordlist = ''
         for r in f:
             if r != '\n':
@@ -93,7 +93,7 @@ def nGet(number, includeNumber):
         f.close()
 
         noteNumbers = list(str(wordlist))
-        with open('notes.txt', 'r') as f:
+        with open('notes.txt', 'r', encoding="utf-8") as f:
             notes = f.readlines()
             mem = 0
             for x in range(len(notes)):
@@ -122,7 +122,7 @@ def nGet(number, includeNumber):
 
 def nLen():
     try:
-        x = open('notes.txt', 'r')
+        x = open('notes.txt', 'r', encoding="utf-8")
         notes = x.readlines()
         x.close()
         return [True, len(notes)]
@@ -132,8 +132,10 @@ def nLen():
 
 
 def tAdd(msg):
+    print(type(msg))
     try:
-        x = open('topics.txt', 'a')
+        msg = str(msg)
+        x = open('topics.txt', 'a', encoding="utf-8")
         x.write(msg + '\n')
         x.close()
         return [True, None]
@@ -144,7 +146,7 @@ def tAdd(msg):
 
 def tDel(number):
     try:
-        f = open('topics.txt', 'r')
+        f = open('topics.txt', 'r', encoding="utf-8")
         topics = f.readlines()
         f.close()
         if number >= len(topics):
@@ -152,7 +154,7 @@ def tDel(number):
         else:
             removed = topics[number]
             topics.remove(removed)
-            f = open('topics.txt', 'w')
+            f = open('topics.txt', 'w', encoding="utf-8")
             f.write(''.join(topics))
             f.close()
             nDel(number)
@@ -164,7 +166,7 @@ def tDel(number):
 
 def tFind(message):
     try:
-        f = open('topics.txt', 'r')
+        f = open('topics.txt', 'r', encoding="utf-8")
         topics = f.readlines()
         f.close()
         a = 0
@@ -180,7 +182,7 @@ def tFind(message):
 
 def tGet(number):
     try:
-        f = open('topics.txt')
+        f = open('topics.txt', 'r', encoding="utf-8")
         topics = f.readlines()
         f.close()
         if number >= len(topics):
@@ -197,7 +199,7 @@ def tGet(number):
 
 def tLen():
     try:
-        f = open('topics.txt', 'r')
+        f = open('topics.txt', 'r', encoding="utf-8")
         topics = f.readlines()
         f.close()
         return [True, len(topics)]
@@ -315,27 +317,21 @@ async def topics(ctx, *, msg = None):
 @commands.check(channel_check)
 async def clear(ctx, function = None, *, msg = None):
     if function == None or function == 'topics' or function == 'all':
-        f = open('topics.txt', 'w')
+        f = open('topics.txt', 'w', encoding="utf-8")
         f.write('')
         f.close()
-        f = open('notes.txt', 'w')
+        f = open('notes.txt', 'w', encoding="utf-8")
         f.write('')
         f.close()
         await ctx.send('Cleared topics and notes.')
 
-        Backup = backup('save')
-        if Backup[0] == False:
-            await ctx.send(Backup[1])
 
     elif function == 'topics':
-        f = open('notes.txt', 'w')
+        f = open('notes.txt', 'w', encoding="utf-8")
         f.write('')
         f.close()
         await ctx.send('Cleared notes')
 
-        Backup = backup('save')
-        if Backup[0] == False:
-            await ctx.send(Backup[1])
     else:
         await ctx.send('Please input ``.clear notes/topics``')
 
@@ -347,19 +343,22 @@ async def topic(ctx, number = None, *, msg = None):
     if number == None or number.isdigit() == False:
         await ctx.send('Please input a number ``.topic [number]``')
     elif number.isdigit():
-        topic = tGet(int(number)-1)
-        note = nGet(int(number)-1, False)
-        if topic[0] == False:
+        number = int(number) - 1
+        topic = tGet(number)
+        note = nGet(number, False)
+        if number < 0:
+            await ctx.send('There\'s no topic ' + (str(number + 1)) + ' silly')
+        elif topic[0] == False:
             await ctx.send(topic[1])
-        if note[0] == False:
+        elif note[0] == False:
             await ctx.send(note[1])
         elif topic[1] == None:
             await ctx.send('That topic doesn\'t exist!')
         else:
             if note[1] == None:
-                await ctx.send(number + '. **' + topic[1] + '**')
+                await ctx.send(str(number + 1) + '. **' + topic[1] + '**')
             else:
-                await ctx.send(number + '. **' + topic[1] + '**\n*' + note[1] + '*')
+                await ctx.send(str(number + 1) + '. **' + topic[1] + '**\n*' + note[1] + '*')
 
 
 @bot.command()
@@ -415,15 +414,10 @@ async def end(ctx, *, msg = None):
             elif msg != None:
                 await logging_channel.send('ended: ' + time + '\ncomment: ' + msg + '\n\n' + str(printlist[1]))
 
-            Backup = backup('save')
-            if Backup[0] == False:
-                await ctx.send(Backup[1])
-
-
-            f = open('topics.txt', 'w')
+            f = open('topics.txt', 'w', encoding="utf-8")
             f.write('')
             f.close()
-            f = open('notes.txt', 'w')
+            f = open('notes.txt', 'w', encoding="utf-8")
             f.write('')
             f.close()
 
@@ -440,8 +434,13 @@ async def note(ctx, function = None, number = None, *, msg = None):
     elif ((function == 'edit' or function == 'add') and (number.isdigit()) == True) and msg == None:
         await ctx.send('Please input a message after the topic number ``note edit/add/delete TopicNumber text``')
     else:
-        number = int(number)
-        if function == 'edit':
+        number = int(number) - 1
+        if number < 0:
+            await ctx.send('There\'s no topic ' + (str(number + 1)) + ' silly')
+            check = False
+        else:
+            check = True
+        if function == 'edit' and check == True:
             delete = nDel(number)
             if delete[0] == False:
                 await ctx.send(delete[1])
@@ -459,7 +458,7 @@ async def note(ctx, function = None, number = None, *, msg = None):
                     await ctx.send('Successfully edited **' + ((delete[1]).replace('\n', '', 1)).replace((str(number) + ' '), '', 1) + '** to **' + msg + '**')
 
 
-        if function == 'add':
+        elif function == 'add' and check == True:
             add = nAdd(number, msg)
             save = tnBackup('save')
             if save[0] == False:
@@ -470,12 +469,19 @@ async def note(ctx, function = None, number = None, *, msg = None):
                 await ctx.send('Succesfully added **' + msg + '** as a note')
 
 
-        if function == 'delete':
-            delete = nDel(number)
-            if delete[0] == False:
-                await ctx.send(delete[1])
+        elif function == 'delete' and check == True:
+            note = nGet(number, True)
+            if note[0] == False:
+                await ctx.send(note[1])
+            elif note[1] != None:
+                delete = nDel(number)
+                if delete[0] == False:
+                    await ctx.send(delete[1])
+
+                else:
+                    await ctx.send('Succesfully removed **' + ((delete[1]).replace('\n', '', 1)).replace((str(number) + ' '), '', 1) + '** from the notes list')
             else:
-                await ctx.send('Succesfully removed **' + ((delete[1]).replace('\n', '', 1)).replace((str(number) + ' '), '', 1) + '** from the notes list')
+                await ctx.send('That note doesn\'t exist!')
 
 
 
@@ -533,13 +539,13 @@ async def help(ctx, command = None):
 @commands.check(channel_check)
 async def backup(ctx, *, msg = None):
     if msg == 'save':
-        save = tnBackup('save')
+        save = tnbackup('save')
         if save[0] == False:
             await ctx.send(save[1])
         else:
             await ctx.send('Succesfully saved topics and notes to backup.')
     elif msg == 'load':
-        load = tnBackup('load')
+        load = tnbackup('load')
         if load[0] == False:
             await ctx.send(load[1])
         else:
