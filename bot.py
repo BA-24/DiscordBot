@@ -132,7 +132,6 @@ def nLen():
 
 
 def tAdd(msg):
-    print(type(msg))
     try:
         msg = str(msg)
         x = open('topics.txt', 'a', encoding="utf-8")
