@@ -1,4 +1,4 @@
-#THIS IS NOT DONE YET AND FEATURES MIGHT NOT WORK AS EXPECTEDLY OR AT ALL
+#THIS BOT SHOULD WORK BUT THERE MIGHT STILL BE BUGS
 
 #list managing ---------------------------------------------------------------------------------------
 
@@ -273,7 +273,7 @@ async def remove(ctx, *, number = None, aliases = ['delete', 'del', 'erase']):
             if find[1] == None:
                 await ctx.send('Could not find the topic **' + number + '**')
             else:
-                number = str(find[1])
+                number = str(find[1] + 1)
         elif find[0] == False:
             await ctx.send(find[1])
     if number.isdigit():
@@ -538,13 +538,13 @@ async def help(ctx, command = None):
 @commands.check(channel_check)
 async def backup(ctx, *, msg = None):
     if msg == 'save':
-        save = tnbackup('save')
+        save = tnBackup('save')
         if save[0] == False:
             await ctx.send(save[1])
         else:
             await ctx.send('Succesfully saved topics and notes to backup.')
     elif msg == 'load':
-        load = tnbackup('load')
+        load = tnBackup('load')
         if load[0] == False:
             await ctx.send(load[1])
         else:
